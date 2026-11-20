@@ -1,0 +1,303 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For My Pattuuhhhhh 💜</title>
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;color:#fff;font-family:Georgia,serif;
+  background:radial-gradient(ellipse at top,#38245f,#100d25 65%,#080714);
+  min-height:100vh;overflow-x:hidden;
+}
+body:before{
+  content:"";position:fixed;inset:0;pointer-events:none;
+  background-image:radial-gradient(white 1px,transparent 1px);
+  background-size:55px 55px;opacity:.3;
+}
+.screen{
+  display:none;min-height:100vh;padding:35px 18px;
+  align-items:center;justify-content:center;text-align:center;
+  position:relative;z-index:1;
+}
+.screen.active{display:flex}
+.panel{
+  width:min(560px,100%);padding:35px 23px;
+  border:1px solid #a98bd966;border-radius:25px;
+  background:#17112dcc;box-shadow:0 0 40px #a56aff22;
+}
+h1{font-size:clamp(30px,7vw,48px);color:#e8caff;margin:12px 0}
+h2{color:#e8caff;font-size:29px}
+p{line-height:1.8;color:#e8dff5;font-size:17px}
+.small{font-size:14px;color:#bca9d4}
+button{
+  border:0;border-radius:30px;padding:13px 24px;
+  background:linear-gradient(100deg,#a76be8,#e2a9e9);
+  color:#241331;font-weight:bold;font-size:16px;
+  cursor:pointer;margin:9px;transition:.2s;
+}
+button:hover{transform:scale(1.05)}
+input{
+  width:min(270px,100%);padding:14px;border-radius:12px;
+  border:1px solid #c9a3ee;background:#211735;color:white;
+  text-align:center;font-size:18px;margin:12px;
+}
+.emoji{font-size:55px;margin:10px}
+.error{color:#ffb2d1;min-height:22px}
+.timeline{display:grid;gap:13px;margin:25px 0}
+.event{
+  padding:17px;border-radius:16px;background:#33234d;
+  border:1px solid #9d7bc766;text-align:left;
+}
+.event strong{display:block;color:#f0caff;font-size:19px}
+.event span{color:#d7c4e9;font-size:15px}
+.reasons{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:25px 0}
+.reason{
+  padding:20px 8px;border-radius:15px;background:#38264f;
+  border:1px solid #b78be966;font-size:17px;
+}
+.star{font-size:30px}
+.memory{
+  padding:20px;background:#352349;border-radius:18px;
+  margin:18px 0;font-style:italic;line-height:1.8;
+}
+.image-placeholder{
+  border:2px dashed #b78be9;border-radius:18px;
+  padding:35px 15px;margin:20px 0;color:#d8b9f5;
+}
+.footer{margin-top:25px;color:#bda7d4;font-size:13px}
+@media(max-width:400px){.reasons{grid-template-columns:1fr}}
+
+/* Floating butterflies background */
+.butterfly {
+  position: fixed;
+  left: -60px;
+  top: 0;
+  z-index: 0;
+  pointer-events: none;
+  font-size: 25px;
+  opacity: 0.8;
+  animation: butterflyFly linear infinite;
+}
+
+@keyframes butterflyFly {
+  0% {
+    transform: translate(-10vw, 100vh) rotate(0deg);
+  }
+  25% {
+    transform: translate(25vw, 70vh) rotate(15deg);
+  }
+  50% {
+    transform: translate(55vw, 45vh) rotate(-15deg);
+  }
+  75% {
+    transform: translate(80vw, 20vh) rotate(15deg);
+  }
+  100% {
+    transform: translate(115vw, -10vh) rotate(-10deg);
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- SCREEN 1: PASSWORD -->
+<section class="screen active" id="s1">
+ <div class="panel">
+  <div class="emoji">🌙</div>
+  <p class="small">A little universe made just for you</p>
+  <h1>Hey, Pattuuhhhhh 💜</h1>
+  <p>Somewhere in this galaxy, there's a little surprise waiting for you.</p>
+  <p>But first... prove that you're the special one. 🔐</p>
+  <input id="password" type="password" placeholder="Enter the secret password">
+  <br>
+  <button onclick="unlock()">Unlock My World ✨</button>
+  <div class="error" id="passError"></div>
+  <p class="small">Hint: The day our forever began.</p>
+ </div>
+</section>
+
+<!-- SCREEN 2: PUZZLE -->
+<section class="screen" id="s2">
+ <div class="panel">
+  <div class="emoji">🗝️</div>
+  <h1>A Little Puzzle</h1>
+  <p>I'm not a place, but I'm where our story began.<br>
+  I come around every year, and it's our special day.<br>
+  What am I?</p>
+  <input id="answer" placeholder="Your answer">
+  <br>
+  <button onclick="solvePuzzle()">Find the Golden Key 🔑</button>
+  <div class="error" id="puzzleError"></div>
+ </div>
+</section>
+
+<!-- SCREEN 3: KEY -->
+<section class="screen" id="s3">
+ <div class="panel">
+  <div class="emoji">🔑✨</div>
+  <h1>You Found It!</h1>
+  <p>The key to this little world belongs to you.</p>
+  <p>Now let's travel through our memories...</p>
+  <button onclick="show('s4')">Enter Our Galaxy 🌌</button>
+ </div>
+</section>
+
+<!-- SCREEN 4: TIMELINE -->
+<section class="screen" id="s4">
+ <div class="panel">
+  <div class="emoji">⭐</div>
+  <h1>Our Little Timeline</h1>
+  <p>Every date holds a little piece of us.</p>
+  <div class="timeline">
+   <div class="event">
+    <strong>💬 First Chat</strong>
+    <span>September 30, 2023</span>
+   </div>
+   <div class="event">
+    <strong>❤️ Our Relationship Began</strong>
+    <span>November 9, 2023</span>
+   </div>
+   <div class="event">
+    <strong>🥹 First Meet</strong>
+    <span>October 27, 2024</span>
+   </div>
+   <div class="event">
+    <strong>🎂 Our Anniversary</strong>
+    <span>Every November 9</span>
+   </div>
+  </div>
+  <button onclick="show('s5')">Next Surprise 💜</button>
+ </div>
+</section>
+
+<!-- SCREEN 5: LOVE REASONS -->
+<section class="screen" id="s5">
+ <div class="panel">
+  <div class="emoji">💗</div>
+  <h1>5 Things I Love About You</h1>
+  <p>Actually, there are a million... but here are five!</p>
+  <div class="reasons">
+   <div class="reason">🎶<br>His singing</div>
+   <div class="reason">🧔<br>His beard</div>
+   <div class="reason">😘<br>His romance</div>
+   <div class="reason">👀<br>His eyes</div>
+   <div class="reason" style="grid-column:1/-1">🤍<br>His traditional look</div>
+  </div>
+  <button onclick="show('s6')">One More Thing... 🥹</button>
+ </div>
+</section>
+
+<!-- SCREEN 6: FAVOURITE MEMORY -->
+<section class="screen" id="s6">
+ <div class="panel">
+  <div class="emoji">🌷</div>
+  <h1>My Favourite Memory</h1>
+  <div class="memory">
+   Of all our memories over the last three years, the moment we first met is still my favorite. I’ll never forget it.
+  </div>
+  <p>That moment will always have a special place in my heart. ❤️</p>
+  <button onclick="show('s7')">Read My Letter 💌</button>
+ </div>
+</section>
+
+<!-- SCREEN 7: SPECIAL MESSAGE -->
+<section class="screen" id="s7">
+ <div class="panel">
+  <div class="emoji">💌</div>
+  <h1>My Special Message</h1>
+  <div class="memory">
+   Looking back at the last three years, every favorite memory I have has you in it. Here’s to many more chapters with my favorite boiiiii.
+  </div>
+  <p>Happy 3rd Anniversary, my Pattuuhhhhh! 💜</p>
+  <button onclick="show('s8')">Our Future Together 🌙</button>
+ </div>
+</section>
+
+<!-- SCREEN 8: FUTURE PROMISE -->
+<section class="screen" id="s8">
+ <div class="panel">
+  <div class="emoji">🌌</div>
+  <h1> Promise </h1>
+  <p>There's so much more waiting for us. More memories, more laughter, more love and many more chapters together.</p>
+  <div style="
+  margin:25px 0;
+  padding:40px 15px;
+  border:1px solid #c99aff;
+  border-radius:20px;
+  background:linear-gradient(135deg,#35204f,#170f2c);
+  box-shadow:0 0 25px #c084fc55;
+  font-size:clamp(30px,7vw,42px);
+  line-height:1.8;
+  color:#f1d5ff;
+  text-shadow:0 0 15px #d99aff;
+">
+  ✨எனது நீ<br>
+  உனது நான் 💕
+</div>
+  <p>Until then, let's keep choosing each other. Always. ❤️</p>
+  <button onclick="show('s9')">One Last Surprise ✨</button>
+ </div>
+</section>
+
+<!-- SCREEN 9: FINAL -->
+<section class="screen" id="s9">
+ <div class="panel">
+  <div class="emoji">💜🌙💜</div>
+  <h1>Happy 3rd Anniversary!</h1>
+  <p>To my favourite person, my happiness, my Pattuuhhhhh...</p>
+  <h2>Here's to forever. ♾️</h2>
+  <p>I love you more than words can ever explain.</p>
+  <p>With all my love,<br>Your favourite girl ❤️</p>
+  <button onclick="show('s1')">Replay Our Story ↻</button>
+  <div class="footer">Made with endless love 💜</div>
+ </div>
+</section>
+
+<script>
+function show(id){
+ document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+ document.getElementById(id).classList.add('active');
+ window.scrollTo({top:0,behavior:'smooth'});
+}
+function unlock(){
+ const value=document.getElementById('password').value.trim();
+ if(value==='09112023'){
+  show('s2');
+ }else{
+  document.getElementById('passError').textContent='Oops! Try again, my special person 💜';
+ }
+}
+function solvePuzzle(){
+ const value=document.getElementById('answer').value.trim().toLowerCase();
+ const accepted=['november 9','november 9th','nov 9','9 november','november ninth','our anniversary','anniversary','november'];
+ if(accepted.includes(value)){
+  show('s3');
+ }else{
+  document.getElementById('puzzleError').textContent='Not quite! Think about our special day. 💕';
+ }
+}
+document.getElementById('password').addEventListener('keydown',e=>{
+ if(e.key==='Enter')unlock();
+});
+document.getElementById('answer').addEventListener('keydown',e=>{
+ if(e.key==='Enter')solvePuzzle();
+});
+</script>
+
+<script>
+const butterflyColors = ["🦋", "🦋", "🦋", "✨"];
+
+for (let i = 0; i < 9; i++) {
+  const butterfly = document.createElement("div");
+  butterfly.className = "butterfly";
+  butterfly.textContent = butterflyColors[i % butterflyColors.length];
+  butterfly.style.animationDuration = (14 + Math.random() * 15) + "s";
+  butterfly.style.animationDelay = (-Math.random() * 25) + "s";
+  document.body.appendChild(butterfly);
+}
+</script>
+</body>
+</html>
